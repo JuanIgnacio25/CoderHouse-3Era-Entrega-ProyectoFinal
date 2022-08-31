@@ -1,0 +1,4 @@
+{"level":"error","message":"(((intermediate value)(intermediate value) && lookupProperty(...)) || container.hooks.helperMissing).call is not a function"}
+{"level":"error","message":"Invalid path: obj.1.data.this - 37:19"}
+{"level":"error","message":"Invalid path: obj.1.this - 37:19"}
+{"level":"error","message":"Invalid path: obj.1.this - 37:19"}
