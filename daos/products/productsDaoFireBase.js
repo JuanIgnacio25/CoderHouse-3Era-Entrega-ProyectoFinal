@@ -10,8 +10,9 @@ router.get('/', (req, res) => {
     const entry = JSON.stringify(req.params);
     const getProducts = (async () => {
         const products = await colProducts.getAll();
-        const data = await users.findUser(req.session.passport.user);
-        res.render('home',{obj:[{products: products},{data: data.dataValues}]});
+        const data = (await users.findUser(req.session.passport.user))[0];
+        const {username , name , address , age , phone_number} = data;
+        res.render('home',{username , name , address , age , phone_number,products: products});
     }) ();
 });
 

@@ -3,7 +3,7 @@ const passport = require('passport');
 
 const upload = require('../multer');
 const { mongo: mongo } = require('./passport');
-const nodeMailer = require('../nodeMailer');
+const transport = require('../transport');
 
 const router = express.Router();
 
@@ -33,15 +33,22 @@ router.post('/signin', passport.authenticate('signIn', { failureRedirect: '/erro
         age: datosDeUsuario.age
     }
     await mongo.updateUser(datosDeUsuario.username, obj);
-
-    const options = {
-        from: 'appbackend@coder.com',
-        to: process.env.GMAIL,
-        html: 'mensaje de prueba',
-        subject: 'Nuevo Registro',
-    }
-    await nodeMailer(options);
-    
+    const user = (await mongo.findUser(datosDeUsuario.username))[0];
+    console.log(user);
+    transport.sendMail({
+        from: "Juan Ignacio <nachocolli1@gmail.com>",
+        to:process.env.GMAIL,
+        html:`<h1>Datos del nuevo usuario</h1>
+              <p>Email: ${user.username}</p>
+              <p>Nombre: ${user.name}</p>
+              <p>Dirección: ${user.address}</p>
+              <p>Edad: ${user.age}</p>
+              <p>Teléfono: ${user.phone_number}</p>`,
+        subject:"Nuevo Usuario Creado!"
+      }).then((result) => {
+        console.log(result);
+      }).catch(console.log) 
+   
     res.redirect('/api/products/');
 });
 

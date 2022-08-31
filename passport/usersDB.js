@@ -40,7 +40,7 @@ class MongoUser {
         try {
             this.mongoConnected();
             const filterUser = this.model.find({ username: username });
-            return filterUser
+            return filterUser;
         } catch (error) {
             console.log(error)
         }

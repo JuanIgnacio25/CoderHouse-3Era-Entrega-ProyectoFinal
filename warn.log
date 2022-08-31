@@ -5,3 +5,4 @@
 {"level":"error","message":"Invalid path: obj.1.data.this - 37:19"}
 {"level":"error","message":"Invalid path: obj.1.this - 37:19"}
 {"level":"error","message":"Invalid path: obj.1.this - 37:19"}
+{"level":"warn","message":"ruta /favicon.ico, método GET no implementada"}
