@@ -13,6 +13,7 @@
             <th>Description</th>
             <th>TimeStapm</th>
             <th>Thumbnail</th>
+            <th> </th>
         </thead>
         <tbody>
             {{#each products}}
@@ -23,6 +24,11 @@
                 <td>{{this.description}}</td>
                 <td>{{this.timestamp}}</td>
                 <td><img style="width: 50px; height:50px" src={{this.thumbnail}}></td>
+                <td>
+                    <form action="/api/products/buy" method="POST">
+                        <input type="submit" value="Buy">
+                    </form>
+                </td>
             </tr>
             {{/each}}
         </tbody>
@@ -39,4 +45,5 @@
     <li>Age: {{this.age}}</li>
     <li>Address: {{this.address}}</li>
     <li>Phone Number: {{this.phone_number}}</li>
+    <li>Profile Photo: <img src="../../public/uploads/{{this.username}}.jpeg" alt="photo"></li>
 </ul>

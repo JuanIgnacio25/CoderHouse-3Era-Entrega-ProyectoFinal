@@ -1,11 +1,12 @@
 <h1>SignIn</h1>
-<form action="/signin"  method="POST" >
+<form action="/signin"  method="POST" enctype="multipart/form-data"  >
     <input placeholder="Email" type="text" name="username"  >   
     <input placeholder="Password" type="password" name="password"  >
     <input placeholder="Name" type="text" name="name" >
     <input placeholder="Age" type="number" name="age">
     <input placeholder="Address" type="text" name="address" >
     <input placeholder="Phone Number" type="number" name="phone" > 
+    <input placeholder="Photo or Avatar" type="file" name="file">
     <input type="submit" value="SignIn">
 </form>
 <h2> Do you already have an account?</h2>

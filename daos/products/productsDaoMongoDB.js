@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const router = express.Router();
 
+
 const Container = require('../../containers/containerMongoDB');
 
 const productsSchema = new mongoose.Schema({
@@ -42,6 +43,8 @@ router.get('/:id', (req, res) => {
         }
     })();
 });
+
+
 
 router.post('/', (req, res) => {
     const newProduct = req.body;

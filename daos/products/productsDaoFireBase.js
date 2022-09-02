@@ -4,6 +4,8 @@ const Container = require('../../containers/containerFirebase');
 const {mongo: users} = require('../../passport/passport');
 
 const colProducts = new Container('products')
+const client = require('../../twilio');
+const transport = require('../../transport');
 
 
 router.get('/', (req, res) => {
@@ -38,6 +40,28 @@ router.post('/', (req, res) => {
         const newId = await colProducts.save(newProduct);
         res.send(`producto agregado, id: ${newId}`);
     }) ();
+});
+
+router.post('/buy', async(req,res) => {
+    const user = (await users.findUser(req.session.passport.user))[0];
+    client.messages.create({
+        to: user.phone_number,
+        from: process.env.TWILIO_PHONE,
+        body:"Compraste un nuevo producto"
+    }).then((data) => {
+        console.log(data)
+    }).catch(console.log);
+
+    transport.sendMail({
+        from: "Juan Ignacio <nachocolli1@gmail.com>",
+        to:process.env.GMAIL,
+        html:`<h1>Nuevo pedido de ${user.username} </h1> `,
+        subject:"Nuevo pedido!"
+      }).then((result) => {
+        console.log(result);
+      }).catch(console.log) 
+
+    res.render('buy');
 });
 
 router.put('/:id',  (req, res) => {

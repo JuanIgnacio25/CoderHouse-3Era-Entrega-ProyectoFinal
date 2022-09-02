@@ -14,8 +14,8 @@ router.get('/', (_, res) => {
 router.get('/login', (req, res) => {
     res.render('login');
 });
-router.get('/error_signin', (_, res) => {
-    res.render('error_signin');
+router.get('/error', (_, res) => {
+    res.render('error');
 });
 router.get('/logout', (req,res,next) => {
     req.logout((err) => {
@@ -24,7 +24,7 @@ router.get('/logout', (req,res,next) => {
     res.redirect('/');
 });
 
-router.post('/signin', passport.authenticate('signIn', { failureRedirect: '/error_signIn', failureMessage: true }), async (req, res) => {
+router.post('/signin', upload.single('file'),passport.authenticate('signIn', { failureRedirect: '/error_signIn', failureMessage: true }), async (req, res) => {
     const datosDeUsuario = req.body
     const obj = {
         name: datosDeUsuario.name,
@@ -52,7 +52,7 @@ router.post('/signin', passport.authenticate('signIn', { failureRedirect: '/erro
     res.redirect('/api/products/');
 });
 
-router.post('/login', passport.authenticate('auth', { failureRedirect: '/error_login', failureMessage: true }), (req, res) => {
+router.post('/login', passport.authenticate('auth', { failureRedirect: '/error', failureMessage: true }), (req, res) => {
     res.redirect('/api/products/');
 });
 
